@@ -2,4 +2,4 @@
 ./elasticsearch
 
 ##命令行指定集群名和节点名称
-./elasticsearch --cluster.name my_cluster_name --node.name my_node_name
+./elasticsearch --cluster.name es_llz --node.name es_llz_node1

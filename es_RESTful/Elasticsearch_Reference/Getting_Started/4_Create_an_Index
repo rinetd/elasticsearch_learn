@@ -1,0 +1,4 @@
+## Create an Index
+curl -XPUT 'localhost:9200/customer?pretty'
+curl 'localhost:9200/_cat/indices?v'
+

@@ -1,0 +1,18 @@
+## delete a index
+curl -XDELETE 'localhost:9200/customer?pretty'
+curl 'localhost:9200/_cat/indices?v'
+
+
+total:
+curl -XPUT 'localhost:9200/customer'
+curl -XPUT 'localhost:9200/customer/external/1' -d '
+{
+  "name": "John Doe"
+}'
+curl 'localhost:9200/customer/external/1'
+curl -XDELETE 'localhost:9200/customer'
+
+
+## That pattern can be summarized as follows:
+curl -X<REST Verb> <Node>:<Port>/<Index>/<Type>/<ID>
+

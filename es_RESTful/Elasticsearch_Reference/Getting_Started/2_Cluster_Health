@@ -1,0 +1,5 @@
+##查看集群健康情况
+curl 'localhost:9200/_cat/health?v'   ##  v :表示是否显示标题
+
+## get a list of nodes in our cluster
+curl 'localhost:9200/_cat/nodes?v'
