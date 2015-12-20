@@ -1,0 +1,5 @@
+##启动集群
+./elasticsearch
+
+##命令行指定集群名和节点名称
+./elasticsearch --cluster.name my_cluster_name --node.name my_node_name
