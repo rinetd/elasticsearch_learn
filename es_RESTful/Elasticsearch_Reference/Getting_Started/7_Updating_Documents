@@ -10,7 +10,8 @@ curl -XPOST 'localhost:9200/customer/external/1/_update?pretty' -d '
   "doc": { "name": "Jane Doe", "age": 20 }
 }'
 
-##未测试成功
+## Groovy dynamic scripting disabled by default from v1.4.3
+## script.groovy.sandbox.enabled: false/true
 curl -XPOST 'localhost:9200/customer/external/1/_update?pretty' -d '
 {
   "script" : "ctx._source.age += 5"
