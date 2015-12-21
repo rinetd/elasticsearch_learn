@@ -1,0 +1,28 @@
+## Deleting Documents
+curl -XDELETE 'localhost:9200/customer/external/2?pretty'
+
+{
+  "found" : true,
+  "_index" : "customer",
+  "_type" : "external",
+  "_id" : "2",
+  "_version" : 2
+}
+
+##  delete multiple documents that match a query condition
+curl -XDELETE 'localhost:9200/customer/external/_query?pretty' -d '
+{
+  "query": { "match": { "name": "John" } }
+}'
+
+{
+  "_indices" : {
+    "customer" : {
+      "_shards" : {
+        "total" : 5,
+        "successful" : 5,
+        "failed" : 0
+      }
+    }
+  }
+}

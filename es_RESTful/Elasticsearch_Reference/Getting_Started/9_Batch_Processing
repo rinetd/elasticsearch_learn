@@ -1,0 +1,58 @@
+## the following call indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one bulk operation:
+curl -XPOST 'localhost:9200/customer/external/_bulk?pretty' -d '
+{"index":{"_id":"1"}}
+{"name": "John Doe" }
+{"index":{"_id":"2"}}
+{"name": "Jane Doe" }
+'
+
+{
+  "took" : 2,
+  "errors" : false,
+  "items" : [ {
+    "index" : {
+      "_index" : "customer",
+      "_type" : "external",
+      "_id" : "1",
+      "_version" : 6,
+      "status" : 200
+    }
+  }, {
+    "index" : {
+      "_index" : "customer",
+      "_type" : "external",
+      "_id" : "2",
+      "_version" : 1,
+      "status" : 201
+    }
+  } ]
+}
+
+## updates the first document (ID of 1) and then deletes the second document (ID of 2) in one bulk operation:
+curl -XPOST 'localhost:9200/customer/external/_bulk?pretty' -d '
+{"update":{"_id":"1"}}
+{"doc": { "name": "John Doe becomes Jane Doe" } }
+{"delete":{"_id":"2"}}
+'
+{
+  "took" : 2,
+  "errors" : false,
+  "items" : [ {
+    "update" : {
+      "_index" : "customer",
+      "_type" : "external",
+      "_id" : "1",
+      "_version" : 7,
+      "status" : 200
+    }
+  }, {
+    "delete" : {
+      "_index" : "customer",
+      "_type" : "external",
+      "_id" : "2",
+      "_version" : 2,
+      "status" : 200,
+      "found" : true
+    }
+  } ]
+}
