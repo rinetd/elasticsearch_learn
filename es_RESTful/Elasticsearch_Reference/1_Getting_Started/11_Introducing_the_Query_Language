@@ -1,0 +1,21 @@
+## the following does a match_all and returns only the first document:
+curl -XPOST 'localhost:9200/.kibana/_search?pretty' -d '
+{
+  "query": { "match_all": {} },
+  "size": 1
+}'
+
+## does a match_all and returns documents 11 through 20:
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": { "match_all": {} },
+  "from": 10,
+  "size": 10
+}'
+
+### This example does a match_all and sorts the results by account balance in descending order and returns the top 10 (default size) documents.
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": { "match_all": {} },
+  "sort": { "balance": { "order": "desc" } }
+}'

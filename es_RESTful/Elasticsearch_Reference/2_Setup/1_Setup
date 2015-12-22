@@ -1,0 +1,11 @@
+## elasticsearch can be started using:
+$ bin/elasticsearch
+
+## To run it in the background, add the -d switch to it:
+$ bin/elasticsearch -d
+
+## Another feature is the ability to pass -X and -D or getopt long style configuration parameters directly to the script.
+## When set, all override anything set using either JAVA_OPTS or ES_JAVA_OPTS. For example:
+$ bin/elasticsearch -Xmx2g -Xms2g -Des.index.store.type=memory --node.name=my-node
+
+We recommend installing the Java 8 update 20 or later, or Java 7 update 55 or later

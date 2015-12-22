@@ -1,0 +1,20 @@
+## This example uses a filtered query to return all accounts with balances between 20000 and 30000, inclusive. In other words, we want to
+## find accounts with a balance that is greater than or equal to 20000 and less than or equal to 30000.
+
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": {
+    "filtered": {
+      "query": { "match_all": {} },
+      "filter": {
+        "range": {
+          "balance": {
+            "gte": 20000,
+            "lte": 30000
+          }
+        }
+      }
+    }
+  }
+}'
+

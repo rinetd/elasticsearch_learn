@@ -1,0 +1,66 @@
+##This example shows how to return two fields, account_number and balance (inside of _source), from the search:
+curl -XPOST 'localhost:9200/llz_protocol_http_20151222/_search?pretty' -d '
+{
+  "query": { "match_all": {} },
+  "_source": ["dest_port", "request_method"]
+}'
+
+#This example returns the dest_ip equals 111.221.29.16:
+curl -XPOST 'localhost:9200/llz_protocol_http_20151222/_search?pretty' -d '
+{
+  "query": { "match": { "dest_ip": "111.221.29.16" } }
+}'
+
+## two match queries and returns all accounts containing "mill" and "lane" in the address:
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}'
+
+## In contrast, this example composes two match queries and returns all accounts containing "mill" or "lane"
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": {
+    "bool": {
+      "should": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}'
+
+## This example composes two match queries and returns all accounts that contain neither "mill" nor "lane" in the address:
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": {
+    "bool": {
+      "must_not": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}'
+
+## This example returns all accounts of anybody who is 40 years old but don’t live in ID(aho):
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "age": "40" } }
+      ],
+      "must_not": [
+        { "match": { "state": "ID" } }
+      ]
+    }
+  }
+}'

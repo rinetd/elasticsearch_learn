@@ -1,0 +1,8 @@
+### returns all documents in the .kibana index:
+curl 'localhost:9200/.kibana/_search?q=*&pretty'
+
+curl -XPOST 'localhost:9200/.kibana/_search?pretty' -d '
+{
+  "query": { "match_all": {} }
+}'
+
