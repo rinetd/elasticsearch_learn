@@ -1,0 +1,123 @@
+curl 'localhost:9200/_mget' -d '{
+    "docs" : [
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "1"
+        },
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "2"
+        }
+    ]
+}'
+
+curl 'localhost:9200/test/_mget' -d '{
+    "docs" : [
+        {
+            "_type" : "type",
+            "_id" : "1"
+        },
+        {
+            "_type" : "type",
+            "_id" : "2"
+        }
+    ]
+}'
+
+curl 'localhost:9200/test/type/_mget' -d '{
+    "docs" : [
+        {
+            "_id" : "1"
+        },
+        {
+            "_id" : "2"
+        }
+    ]
+}'
+
+curl 'localhost:9200/test/type/_mget' -d '{
+    "ids" : ["1", "2"]
+}'
+
+curl 'localhost:9200/_mget' -d '{
+    "docs" : [
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "1",
+            "_source" : false
+        },
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "2",
+            "_source" : ["field3", "field4"]
+        },
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "3",
+            "_source" : {
+                "include": ["user"],
+                "exclude": ["user.location"]
+            }
+        }
+    ]
+}'
+
+curl 'localhost:9200/_mget' -d '{
+    "docs" : [
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "1",
+            "_source" : false
+        },
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "2",
+            "_source" : ["field3", "field4"]
+        },
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "3",
+            "_source" : {
+                "include": ["user"],
+                "exclude": ["user.location"]
+            }
+        }
+    ]
+}'
+
+curl 'localhost:9200/test/type/_mget?fields=field1,field2' -d '{
+    "docs" : [
+        {
+            "_id" : "1"
+        },
+        {
+            "_id" : "2",
+            "fields" : ["field3", "field4"]
+        }
+    ]
+}'
+
+curl 'localhost:9200/_mget?routing=key1' -d '{
+    "docs" : [
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "1",
+            "_routing" : "key2"
+        },
+        {
+            "_index" : "test",
+            "_type" : "type",
+            "_id" : "2"
+        }
+    ]
+}'
+

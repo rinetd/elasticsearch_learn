@@ -1,0 +1,47 @@
+Automatic index creation can be disabled by setting action.auto_create_index to false in the config file of all nodes.
+    Automatic mapping creation can be disabled by setting index.mapper.dynamic to false in the config files of all nodes (or on the specific index settings).
+
+Automatic index creation can include a pattern based white/black list, for example,
+ set action.auto_create_index to +aaa*,-bbb*,+ccc*,-* (+ meaning allowed, and - meaning disallowed).
+
+Operation Type
+
+
+Here is an example of using the op_type parameter:
+
+    $ curl -XPUT 'http://localhost:9200/twitter/tweet/1?op_type=create' -d '{
+"user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}'
+Another option to specify create is to use the following uri:
+
+    $ curl -XPUT 'http://localhost:9200/twitter/tweet/1/_create' -d '{
+"user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}'
+
+Automatic ID Generationedit
+
+Routingedit
+
+By default, shard placement — or routing — is controlled by using a hash of the document’s id value. For more explicit control, the value fed into the hash function used by the router can be directly specified on a per-operation basis using the routing parameter. For example:
+
+    $ curl -XPOST 'http://localhost:9200/twitter/tweet?routing=kimchy' -d '{
+"user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}'
+
+Parents & Childrenedit
+
+A child document can be indexed by specifying its parent when indexing. For example:
+
+    $ curl -XPUT localhost:9200/blogs/blog_tag/1122?parent=1111 -d '{
+"tag" : "something"
+}'
+
+TTL
+A document can be indexed with a ttl (time to live) associated with it. Expired documents will be expunged automatically.
+

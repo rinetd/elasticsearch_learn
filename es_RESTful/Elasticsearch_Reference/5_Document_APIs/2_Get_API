@@ -1,0 +1,27 @@
+Source filtering
+
+curl -XGET 'http://localhost:9200/twitter/tweet/1?_source=false'
+
+curl -XGET 'http://localhost:9200/twitter/tweet/1?_source_include=*.id&_source_exclude=entities'
+
+curl -XGET 'http://localhost:9200/twitter/tweet/1?_source=*.id,retweeted'
+
+
+Fields
+
+curl -XGET 'http://localhost:9200/twitter/tweet/1?fields=title,content'
+
+Getting the _source directlyedit
+
+curl -XGET 'http://localhost:9200/twitter/tweet/1/_source'
+
+curl -XGET 'http://localhost:9200/twitter/tweet/1/_source?_source_include=*.id&_source_exclude=entities'
+
+preference
+
+_primary
+The operation will go and be executed only on the primary shards.
+_local
+The operation will prefer to be executed on a local allocated shard if possible.
+
+

@@ -1,0 +1,17 @@
+$ curl -XDELETE 'http://localhost:9200/twitter/tweet/_query?q=user:kimchy'
+
+$ curl -XDELETE 'http://localhost:9200/twitter/tweet/_query' -d '{
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+'
+
+$ curl -XDELETE 'http://localhost:9200/twitter/_query?q=user:kimchy'
+
+$ curl -XDELETE 'http://localhost:9200/twitter/tweet,user/_query?q=user:kimchy'
+
+$ curl -XDELETE 'http://localhost:9200/kimchy,elasticsearch/_query?q=tag:wow'
+
+$ curl -XDELETE 'http://localhost:9200/_all/_query?q=tag:wow'
+
