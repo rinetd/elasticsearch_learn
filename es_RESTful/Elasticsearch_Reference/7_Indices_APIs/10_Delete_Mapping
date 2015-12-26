@@ -1,0 +1,17 @@
+Allow to delete a mapping (type) along with its data. The REST endpoints are
+
+[DELETE] /{index}/{type}
+
+[DELETE] /{index}/{type}/_mapping
+
+[DELETE] /{index}/_mapping/{type}
+
+where
+
+index
+
+* | _all | glob pattern | name1, name2, …
+
+type
+
+* | _all | glob pattern | name1, name2, …

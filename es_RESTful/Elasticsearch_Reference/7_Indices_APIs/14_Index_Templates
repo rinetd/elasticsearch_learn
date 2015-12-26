@@ -1,0 +1,38 @@
+Index Templates
+
+curl -XPUT localhost:9200/_template/template_1 -d '
+{
+    "template" : "te*",
+    "settings" : {
+        "number_of_shards" : 1
+    },
+    "mappings" : {
+        "type1" : {
+            "_source" : { "enabled" : false }
+        }
+    }
+}
+'
+
+It is also possible to include aliases in an index template as follows:
+
+curl -XPUT localhost:9200/_template/template_1 -d '
+{
+    "template" : "te*",
+    "settings" : {
+        "number_of_shards" : 1
+    },
+    "aliases" : {
+        "alias1" : {},
+        "alias2" : {
+            "filter" : {
+                "term" : {"user" : "kimchy" }
+            },
+            "routing" : "kimchy"
+        },
+        "{index}-alias" : {}
+    }
+}
+'
+
+

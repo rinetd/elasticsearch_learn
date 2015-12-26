@@ -1,0 +1,10 @@
+$ curl -XGET 'http://localhost:9200/twitter/_settings'
+
+Multiple Indices and Types
+
+curl -XGET 'http://localhost:9200/twitter,kimchy/_settings'
+
+curl -XGET 'http://localhost:9200/_all/_settings'
+
+curl -XGET 'http://localhost:9200/2013-*/_settings'
+

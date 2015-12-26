@@ -1,0 +1,8 @@
+curl -XPOST 'localhost:9200/my_index/_close'
+
+curl -XPOST 'localhost:9200/my_index/_open'
+
+All indices can be opened or closed at once using _all as the index name or specifying patterns
+that identify them all (e.g. *).
+
+

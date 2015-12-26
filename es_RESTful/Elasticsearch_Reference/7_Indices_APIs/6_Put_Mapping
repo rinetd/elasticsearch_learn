@@ -1,0 +1,39 @@
+$ curl -XPUT 'http://localhost:9200/twitter/_mapping/tweet' -d '
+{
+    "tweet" : {
+        "properties" : {
+            "message" : {"type" : "string", "store" : true }
+        }
+    }
+}
+'
+
+Multi Indexedit
+
+The put mapping API can be applied to more than one index with a single call, or even on _all the indices.
+
+$ curl -XPUT 'http://localhost:9200/kimchy,elasticsearch/_mapping/tweet' -d '
+{
+    "tweet" : {
+        "properties" : {
+            "message" : {"type" : "string", "store" : true }
+        }
+    }
+}
+'
+
+All options:
+
+PUT /{index}/_mapping/{type}
+where
+
+{index}
+
+blank | * | _all | glob pattern | name1, name2, …
+
+{type}
+
+Name of the type to add. Must be the name of the type defined in the body.
+
+Instead of _mapping you can also use the plural _mappings.
+

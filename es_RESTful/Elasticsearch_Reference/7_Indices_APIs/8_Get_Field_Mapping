@@ -1,0 +1,37 @@
+curl -XGET 'http://localhost:9200/twitter/_mapping/tweet/field/text'
+
+curl -XGET 'http://localhost:9200/twitter,kimchy/_mapping/field/message'
+
+curl -XGET 'http://localhost:9200/_all/_mapping/tweet,book/field/message,user.id'
+
+curl -XGET 'http://localhost:9200/_all/_mapping/tw*/field/*.id'
+
+curl -XGET "http://localhost:9200/publications/_mapping/article/field/author.id,text,name"
+
+returns:
+
+{
+   "publications": {
+      "article": {
+         "text": {
+            "full_name": "abstract",
+            "mapping": {
+               "abstract": { "type": "string", "index_name": "text" }
+            }
+         },
+         "author.id": {
+            "full_name": "author.id",
+            "mapping": {
+               "id": { "type": "string" }
+            }
+         },
+         "name": {
+            "full_name": "author.name",
+            "mapping": {
+               "name": { "type": "string", "index_name": "author" }
+            }
+         }
+      }
+   }
+}
+

@@ -1,0 +1,58 @@
+Index Settings
+
+Each index created can have specific settings associated with it.
+
+$ curl -XPUT 'http://localhost:9200/twitter/'
+
+$ curl -XPUT 'http://localhost:9200/twitter/' -d '
+index :
+    number_of_shards : 3
+    number_of_replicas : 2
+'
+
+$ curl -XPUT 'http://localhost:9200/twitter/' -d '{
+    "settings" : {
+        "index" : {
+            "number_of_shards" : 3,
+            "number_of_replicas" : 2
+        }
+    }
+}'
+
+or more simplified
+
+$ curl -XPUT 'http://localhost:9200/twitter/' -d '{
+    "settings" : {
+        "number_of_shards" : 3,
+        "number_of_replicas" : 2
+    }
+}'
+
+Mappingsedit
+
+The create index API allows to provide a set of one or more mappings:
+
+curl -XPOST localhost:9200/test -d '{
+    "settings" : {
+        "number_of_shards" : 1
+    },
+    "mappings" : {
+        "type1" : {
+            "_source" : { "enabled" : false },
+            "properties" : {
+                "field1" : { "type" : "string", "index" : "not_analyzed" }
+            }
+        }
+    }
+}'
+
+Creation Date
+
+When an index is created, a timestamp is stored in the index metadata for the creation date. By default this it is automatically generated but it can also be specified using the creation_date parameter on the create index API:
+
+curl -XPUT localhost:9200/test -d '{
+    "creation_date" : 1407751337000
+}'
+
+
+
