@@ -1,0 +1,65 @@
+Most APIs that refer to an index parameter support execution across multiple indices,
+using simple test1,test2,test3 notation (or _all for all indices). It also support wildcards,
+for example: test*, and the ability to "add" (+) and "remove" (-), for example: +test*,-test3.
+
+Response Filtering
+
+All REST APIs accept a filter_path parameter that can be used to reduce the response returned by elasticsearch.
+This parameter takes a comma separated list of filters expressed with the dot notation:
+
+curl -XGET 'localhost:9200/_search?pretty&filter_path=took,hits.hits._id,hits.hits._score'
+{
+  "took" : 3,
+  "hits" : {
+    "hits" : [
+      {
+        "_id" : "3640",
+        "_score" : 1.0
+      },
+      {
+        "_id" : "3642",
+        "_score" : 1.0
+      }
+    ]
+  }
+}
+
+
+Note that elasticsearch sometimes returns directly the raw value of a field, like the _source field. If you want to
+filter _source fields, you should consider combining the already existing _source parameter (see Get API for more details) with the filter_path parameter like this:
+
+curl -XGET 'localhost:9200/_search?pretty&filter_path=hits.hits._source&_source=title'
+{
+  "hits" : {
+    "hits" : [ {
+      "_source":{"title":"Book #2"}
+    }, {
+      "_source":{"title":"Book #1"}
+    }, {
+      "_source":{"title":"Book #3"}
+    } ]
+  }
+}
+
+The flat_settings flag affects rendering of the lists of settings. When flat_settings flag is true settings are returned in a flat format:
+
+{
+  "persistent" : { },
+  "transient" : {
+    "discovery.zen.minimum_master_nodes" : "1"
+  }
+}
+When the flat_settings flag is false settings are returned in a more human readable structured format:
+
+{
+  "persistent" : { },
+  "transient" : {
+    "discovery" : {
+      "zen" : {
+        "minimum_master_nodes" : "1"
+      }
+    }
+  }
+}
+By default the flat_settings is set to false.
+
