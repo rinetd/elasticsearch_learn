@@ -1,0 +1,20 @@
+Allows to selectively load specific stored fields for each document represented by a search hit.
+
+{
+    "fields" : ["user", "postDate"],
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+* can be used to load all stored fields from the document.
+
+An empty array will cause only the _id and _type for each hit to be returned, for example:
+
+{
+    "fields" : [],
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+

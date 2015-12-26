@@ -1,0 +1,6 @@
+curl -XGET 'localhost:9200/twitter/_search_shards'
+
+And specifying the same request, this time with a routing value:
+
+curl -XGET 'localhost:9200/twitter/_search_shards?routing=foo,baz'
+

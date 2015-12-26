@@ -1,0 +1,11 @@
+Inner hits can be used by defining a inner_hits definition on a nested,
+ has_child or has_parent query and filter. The structure looks like this:
+
+"<query>" : {
+    "inner_hits" : {
+        <inner_hits_options>
+    }
+}
+
+
+

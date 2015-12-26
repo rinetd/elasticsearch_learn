@@ -1,0 +1,10 @@
+The count API allows to easily execute a query and get the number of matches for that query.
+
+$ curl -XGET 'http://localhost:9200/twitter/tweet/_count?q=user:kimchy'
+
+$ curl -XGET 'http://localhost:9200/twitter/tweet/_count' -d '
+{
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}'

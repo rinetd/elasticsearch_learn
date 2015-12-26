@@ -1,0 +1,9 @@
+Exclude documents which have a _score less than the minimum specified in min_score:
+
+{
+    "min_score": 0.5,
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+

@@ -1,0 +1,11 @@
+The validate API allows a user to validate a potentially expensive query without executing it. The following example shows how it can be used:
+
+curl -XPUT 'http://localhost:9200/twitter/tweet/1' -d '{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}'
+When the query is valid, the response contains valid:true:
+
+curl -XGET 'http://localhost:9200/twitter/_validate/query?q=user:foo'
+{"valid":true,"_shards":{"total":1,"successful":1,"failed":0}}

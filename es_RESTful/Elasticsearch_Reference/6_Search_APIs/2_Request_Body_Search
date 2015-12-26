@@ -1,0 +1,165 @@
+$ curl -XGET 'http://localhost:9200/twitter/tweet/_search' -d '{
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+'
+
+Query
+
+{
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+From / Size
+
+{
+    "from" : 0, "size" : 10,
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+Sort
+
+{
+    "sort" : [
+        { "post_date" : {"order" : "asc"}},
+        "user",
+        { "name" : "desc" },
+        { "age" : "desc" },
+        "_score"
+    ],
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+
+curl -XPOST 'localhost:9200/_search' -d '{
+   "query" : {
+    ...
+   },
+   "sort" : [
+      {"price" : {"order" : "asc", "mode" : "avg"}}
+   ]
+}'
+
+Allow to sort by _geo_distance. Here is an example:
+
+{
+    "sort" : [
+        {
+            "_geo_distance" : {
+                "pin.location" : [-70, 40],
+                "order" : "asc",
+                "unit" : "km",
+                "mode" : "min",
+                "distance_type" : "sloppy_arc"
+            }
+        }
+    ],
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+Lat Lon as Propertiesedit
+
+{
+    "sort" : [
+        {
+            "_geo_distance" : {
+                "pin.location" : {
+                    "lat" : 40,
+                    "lon" : -70
+                },
+                "order" : "asc",
+                "unit" : "km"
+            }
+        }
+    ],
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+Lat Lon as Stringedit
+
+Format in lat,lon.
+
+{
+    "sort" : [
+        {
+            "_geo_distance" : {
+                "pin.location" : "40,-70",
+                "order" : "asc",
+                "unit" : "km"
+            }
+        }
+    ],
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+
+{
+    "sort" : [
+        {
+            "_geo_distance" : {
+                "pin.location" : "40,-70",
+                "order" : "asc",
+                "unit" : "km"
+            }
+        }
+    ],
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+Geohashedit
+
+{
+    "sort" : [
+        {
+            "_geo_distance" : {
+                "pin.location" : "drm3btev3e86",
+                "order" : "asc",
+                "unit" : "km"
+            }
+        }
+    ],
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+
+Lat Lon as Arrayedit
+
+Format in [lon, lat], note, the order of lon/lat here in order to conform with GeoJSON.
+
+{
+    "sort" : [
+        {
+            "_geo_distance" : {
+                "pin.location" : [-70, 40],
+                "order" : "asc",
+                "unit" : "km"
+            }
+        }
+    ],
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}
+
+
+Multiple geo points can be passed as an array containing any geo_point format, for example
+
+"pin.location" : [[-70, 40], [-71, 42]]
+"pin.location" : [{"lat": 40, "lon": -70}, {"lat": 42, "lon": -71}]
+

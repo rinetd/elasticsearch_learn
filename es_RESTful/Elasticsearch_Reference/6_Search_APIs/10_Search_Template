@@ -1,0 +1,36 @@
+The /_search/template endpoint allows to use the mustache language to pre render search requests, before they are executed and fill existing templates with template parameters.
+
+GET /_search/template
+{
+    "inline" : {
+      "query": { "match" : { "{{my_field}}" : "{{my_value}}" } },
+      "size" : "{{my_size}}"
+    },
+    "params" : {
+        "my_field" : "foo",
+        "my_value" : "bar",
+        "my_size" : 5
+    }
+}
+
+When params is { "start": 10, "end": 15 } this query would be rendered as:
+
+{
+    "range": {
+        "line_no": {
+            "gte": "10",
+            "lte": "15"
+        }
+  }
+}
+
+{
+    "params": {
+        "text":      "words to search for",
+        "line_no": {
+            "start": 10,
+            "end":   20
+        }
+    }
+}
+

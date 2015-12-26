@@ -1,0 +1,9 @@
+$ curl -XGET 'http://localhost:9200/twitter/tweet/_search/exists?q=user:kimchy'
+
+$ curl -XGET 'http://localhost:9200/twitter/tweet/_search/exists' -d '
+{
+    "query" : {
+        "term" : { "user" : "kimchy" }
+    }
+}'
+

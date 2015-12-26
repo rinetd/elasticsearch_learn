@@ -1,0 +1,14 @@
+Most search APIs are multi-index, multi-type, with the exception of the Explain API endpoints.
+
+$ curl -XGET 'http://localhost:9200/twitter/_search?q=user:kimchy'
+We can also search within specific types:
+
+$ curl -XGET 'http://localhost:9200/twitter/tweet,user/_search?q=user:kimchy'
+We can also search all tweets with a certain tag across several indices (for example, when each user has his own index):
+
+$ curl -XGET 'http://localhost:9200/kimchy,elasticsearch/tweet/_search?q=tag:wow'
+Or we can search all tweets across all available indices using _all placeholder:
+
+$ curl -XGET 'http://localhost:9200/_all/tweet/_search?q=tag:wow'
+
+$ curl -XGET 'http://localhost:9200/_search?q=tag:wow'
