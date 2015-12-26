@@ -1,0 +1,4 @@
+The cluster.routing.allocation settings (disable_allocation, disable_new_allocation and disable_replica_location) have been replaced by the single setting:
+
+cluster.routing.allocation.enable: all|primaries|new_primaries|none
+

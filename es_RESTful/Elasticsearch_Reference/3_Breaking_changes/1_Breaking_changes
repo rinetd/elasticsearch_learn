@@ -1,0 +1,5 @@
+As a general rule:
+
+Migration between major versions — e.g. 1.x to 2.x —  requires a full cluster restart.
+Migration between minor versions — e.g. 1.x to 1.y — can be performed by upgrading one node at a time.
+

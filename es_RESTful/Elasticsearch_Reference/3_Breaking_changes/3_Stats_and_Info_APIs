@@ -1,0 +1,13 @@
+For instance, if you just want the nodes section of the the cluster_state, instead of:
+
+GET /_cluster/state?filter_metadata&filter_routing_table&filter_blocks
+you now use:
+
+GET /_cluster/state/nodes
+Similarly for the nodes_stats API, if you want the transport and http metrics only, instead of:
+
+GET /_nodes/stats?clear&transport&http
+you now use:
+
+GET /_nodes/stats/transport,http
+
