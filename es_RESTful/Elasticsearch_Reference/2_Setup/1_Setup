@@ -9,3 +9,67 @@ $ bin/elasticsearch -d
 $ bin/elasticsearch -Xmx2g -Xms2g -Des.index.store.type=memory --node.name=my-node
 
 We recommend installing the Java 8 update 20 or later, or Java 7 update 55 or later
+
+
+Virtual memory
+
+sysctl -w vm.max_map_count=262144
+
+To set this value permanently, update the vm.max_map_count setting in /etc/sysctl.conf.
+
+Memory Settingsedit
+
+Disable swap
+On Linux systems, you can disable swap temporarily by running: sudo swapoff -a. To disable it permanently,
+you will need to edit the /etc/fstab file and comment out any lines that contain the word swap.
+
+On Windows, the equivalent can be achieved by disabling the paging file entirely via System Properties →
+ Advanced → Performance → Advanced → Virtual memory.
+
+Configure swappiness
+The second option is to ensure that the sysctl value vm.swappiness is set to 0.
+
+The third option is to use mlockall on Linux/Unix systems, or VirtualLock on Windows,
+to try to lock the process address space into RAM, preventing any Elasticsearch memory from being swapped out. This can be done, by adding this line to the config/elasticsearch.yml file:
+
+bootstrap.mlockall: true
+
+Elasticsearch Settings
+
+The configuration format is YAML. Here is an example of changing the address all network based modules will use to bind and publish to:
+
+network :
+    host : 10.0.0.4
+
+Pathsedit
+
+In production use, you will almost certainly want to change paths for data and log files:
+
+path:
+  logs: /var/log/elasticsearch
+  data: /var/data/elasticsearch
+
+Cluster name
+
+cluster:
+  name: <NAME OF YOUR CLUSTER>
+
+Node name
+
+node:
+  name: <NAME OF YOUR NODE>
+
+node:
+  name: ${HOSTNAME}
+
+Index Settings
+
+$ curl -XPUT http://localhost:9200/kimchy/ -d \
+'
+index :
+    store:
+        type: memory
+'
+
+
+

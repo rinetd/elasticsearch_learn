@@ -1,0 +1,36 @@
+滚动升级－－促使数据分片分配到新版本节点
+Back Up Your Data!
+
+1.0 and lateredit
+
+To back up a running 1.0 or later system, it is simplest
+to use the snapshot feature. See the complete instructions for backup and restore with snapshots.
+
+This syntax applies to Elasticsearch 1.0 and later:
+
+curl -XPUT localhost:9200/_cluster/settings -d '{
+        "transient" : {
+            "cluster.routing.allocation.enable" : "none"
+        }
+}'
+
+curl -XPOST localhost:9200/_all/_flush/synced
+Note that a synced flush call is a best effort operation. It will fail there are any pending indexing operations. It is safe to issue it multiple times if needed.
+
+Shut down a single node within the cluster.
+curl -XPOST 'http://localhost:9200/_cluster/nodes/_local/_shutdown'
+
+Start the now upgraded node. Confirm that it joins the cluster.
+Re-enable shard reallocation:
+curl -XPUT localhost:9200/_cluster/settings -d '{
+        "transient" : {
+            "cluster.routing.allocation.enable" : "all"
+        }
+}'
+
+
+Stop all Elasticsearch services on all nodes in the cluster.
+        curl -XPOST 'http://localhost:9200/_shutdown'
+
+
+

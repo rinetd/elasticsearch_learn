@@ -1,0 +1,7 @@
+Each package features a configuration file, which allows you to set the following parameters
+
+add the elasticsearch service
+
+sudo /sbin/chkconfig --add elasticsearch
+sudo service elasticsearch start
+

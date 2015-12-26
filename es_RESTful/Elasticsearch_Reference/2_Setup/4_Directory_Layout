@@ -1,0 +1,7 @@
+Note, there are no multiple copies of the same data, in that, its similar to RAID 0. Though simple, it should
+provide a good solution for people that don’t want to mess with RAID. Here is how it is configured:
+path.data: /mnt/first,/mnt/second
+Or the in an array format:
+
+path.data: ["/mnt/first", "/mnt/second"]
+
