@@ -1,0 +1,5 @@
+% curl '127.0.0.1:9200/_cat/fielddata?v'
+id                     host    ip            node          total   body    text
+c223lARiSGeezlbrcugAYQ myhost1 10.20.100.200 Jessica Jones 385.6kb 159.8kb 225.7kb
+waPCbitNQaCL6xC8VxjAwg myhost2 10.20.100.201 Adversary     435.2kb 159.8kb 275.3kb
+yaDkp-G3R0q1AJ-HUEvkSQ myhost3 10.20.100.202 Microchip     284.6kb 109.2kb 175.3kb

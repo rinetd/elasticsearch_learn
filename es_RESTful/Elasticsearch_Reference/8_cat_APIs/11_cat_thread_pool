@@ -1,0 +1,9 @@
+cat thread pool
+
+curl 'localhost:9200/_cat/thread_pool?v'
+
+ % curl 'localhost:9200/_cat/thread_pool?v&h=id,host,suggest.active,suggest.rejected,suggest.completed'
+ host      suggest.active suggest.rejected suggest.completed
+ host1                  0                0                 0
+ host2                  0                0                 0
+
