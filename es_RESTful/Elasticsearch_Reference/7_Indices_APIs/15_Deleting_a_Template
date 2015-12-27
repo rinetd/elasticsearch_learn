@@ -1,2 +1,8 @@
 curl -XDELETE localhost:9200/_template/template_1
 
+Templates existsedit
+
+Used to check if the template exists or not. For example:
+
+curl -XHEAD -i localhost:9200/_template/template_1
+
