@@ -1,0 +1,25 @@
+The cluster nodes info API allows to retrieve one or more (or all) of the cluster nodes information.
+
+curl -XGET 'http://localhost:9200/_nodes'
+curl -XGET 'http://localhost:9200/_nodes/nodeId1,nodeId2'
+The first command retrieves information of all the nodes in the cluster. The second command selectively retrieves nodes information of only nodeId1 and nodeId2. All the nodes selective options are explained here.
+
+By default, it just returns all attributes and core settings for a node. It also allows to get only information on settings, os, process, jvm, thread_pool, network, transport, http and plugins:
+
+curl -XGET 'http://localhost:9200/_nodes/process'
+curl -XGET 'http://localhost:9200/_nodes/_all/process'
+curl -XGET 'http://localhost:9200/_nodes/nodeId1,nodeId2/jvm,process'
+# same as above
+curl -XGET 'http://localhost:9200/_nodes/nodeId1,nodeId2/info/jvm,process'
+
+curl -XGET 'http://localhost:9200/_nodes/nodeId1,nodeId2/_all
+
+# Change cache to 20 seconds
+plugins.info_refresh_interval: 20s
+
+# Infinite cache
+plugins.info_refresh_interval: -1
+
+# Disable cache
+plugins.info_refresh_interval: 0
+

@@ -1,0 +1,13 @@
+$ curl -XGET 'http://localhost:9200/_cluster/state'
+
+A couple of example calls:
+
+# return only metadata and routing_table data for specified indices
+$ curl -XGET 'http://localhost:9200/_cluster/state/metadata,routing_table/foo,bar'
+
+# return everything for these two indices
+$ curl -XGET 'http://localhost:9200/_cluster/state/_all/foo,bar'
+
+# Return only blocks data
+$ curl -XGET 'http://localhost:9200/_cluster/state/blocks'
+

@@ -1,0 +1,14 @@
+Allows to update cluster wide specific settings. Settings updated can either be persistent (applied cross restarts) or transient (will not survive a full cluster restart). Here is an example:
+
+curl -XPUT localhost:9200/_cluster/settings -d '{
+    "persistent" : {
+        "discovery.zen.minimum_master_nodes" : 2
+    }
+}'
+Or:
+
+curl -XPUT localhost:9200/_cluster/settings -d '{
+    "transient" : {
+        "discovery.zen.minimum_master_nodes" : 2
+    }
+}'
