@@ -1,0 +1,14 @@
+{
+    "wildcard" : { "user" : "ki*y" }
+}
+A boost can also be associated with the query:
+
+{
+    "wildcard" : { "user" : { "value" : "ki*y", "boost" : 2.0 } }
+}
+Or :
+
+{
+    "wildcard" : { "user" : { "wildcard" : "ki*y", "boost" : 2.0 } }
+}
+

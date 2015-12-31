@@ -1,0 +1,18 @@
+{
+    "filtered" : {
+        "query" : {
+            "term" : { "name.first" : "shay" }
+        },
+        "filter" : {
+            "or" : [
+                {
+                    "term" : { "name.second" : "banon" }
+                },
+                {
+                    "term" : { "name.nick" : "kimchy" }
+                }
+            ]
+        }
+    }
+}
+

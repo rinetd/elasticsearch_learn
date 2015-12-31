@@ -1,0 +1,93 @@
+PUT my_index
+{
+  "mappings": {
+    "my_type": {
+      "properties": {
+        "full_text": {
+          "type":  "string"
+        },
+        "exact_value": {
+          "type":  "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}
+
+PUT my_index/my_type/1
+{
+  "full_text":   "Quick Foxes!",
+  "exact_value": "Quick Foxes!"
+}
+VIEW IN SENSE
+
+
+The full_text field is analyzed by default.
+
+
+
+The exact_value field is set to be not_analyzed.
+
+
+
+The full_text inverted index will contain the terms: [quick, foxes].
+
+
+
+The exact_value inverted index will contain the exact term: [Quick Foxes!].
+
+Now, compare the results for the term query and the match query:
+
+GET my_index/my_type/_search
+{
+  "query": {
+    "term": {
+      "exact_value": "Quick Foxes!"
+    }
+  }
+}
+
+GET my_index/my_type/_search
+{
+  "query": {
+    "term": {
+      "full_text": "Quick Foxes!"
+    }
+  }
+}
+
+GET my_index/my_type/_search
+{
+  "query": {
+    "term": {
+      "exact_value": "foxes"
+    }
+  }
+}
+
+GET my_index/my_type/_search
+{
+  "query": {
+    "match": {
+      "full_text": "Quick Foxes!"
+    }
+  }
+}
+VIEW IN SENSE
+
+
+This query matches because the exact_value field contains the exact term Quick Foxes!.
+
+
+
+This query does not match, because the full_text field only contains the terms quick and foxes. It does not contain the exact term Quick Foxes!.
+
+
+
+A term query for the term foxes matches the full_text field.
+
+
+
+This match query on the full_text field first analyzes the query string, then looks for documents containing quick or foxes or both.
+

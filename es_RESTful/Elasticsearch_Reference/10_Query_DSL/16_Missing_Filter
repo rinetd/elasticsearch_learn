@@ -1,0 +1,16 @@
+Returns documents that have only null values or no value in the original field:
+
+{
+    "constant_score" : {
+        "filter" : {
+            "missing" : { "field" : "user" }
+        }
+    }
+}
+For instance, the following docs would match the above filter:
+
+{ "user": null }
+{ "user": [] }
+{ "user": [null] }
+{ "foo":  "bar" }
+

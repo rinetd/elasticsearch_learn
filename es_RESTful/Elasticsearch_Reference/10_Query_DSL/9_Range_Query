@@ -1,0 +1,28 @@
+{
+    "range" : {
+        "age" : {
+            "gte" : 10,
+            "lte" : 20,
+            "boost" : 2.0
+        }
+    }
+}
+
+
+number/date fields, the query is a NumericRangeQuery.
+
+Date optionsedit
+
+When applied on date fields the range filter accepts also a time_zone parameter.
+The time_zone parameter will be applied to your input lower and upper bounds and will move them to UTC time based date:
+
+{
+    "range" : {
+        "born" : {
+            "gte": "2012-01-01",
+            "lte": "now",
+            "time_zone": "+1:00"
+        }
+    }
+}
+
