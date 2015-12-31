@@ -1,0 +1,51 @@
+PUT /_snapshot/my_backup
+{
+  "type": "fs",
+  "settings": {
+        ... repository specific settings ...
+  }
+}
+
+GET /_snapshot/my_backup
+
+$ curl -XPUT 'http://localhost:9200/_snapshot/my_backup' -d '{
+    "type": "fs",
+    "settings": {
+        "location": "/mount/backups/my_backup",
+        "compress": true
+    }
+}'
+
+$ curl -XPUT 'http://localhost:9200/_snapshot/my_backup' -d '{
+    "type": "fs",
+    "settings": {
+        "location": "my_backup",
+        "compress": true
+    }
+}'
+
+PUT /_snapshot/my_backup/snapshot_1?wait_for_completion=true
+
+Restoreedit
+
+A snapshot can be restored using the following command:
+
+POST /_snapshot/my_backup/snapshot_1/_restore
+
+
+GET /_snapshot/my_backup/snapshot_1
+VIEW IN SENSE
+All snapshots currently stored in the repository can be listed using the following command:
+
+GET /_snapshot/my_backup/_all
+VIEW IN SENSE
+A snapshot can be deleted from the repository using the following command:
+
+DELETE /_snapshot/my_backup/snapshot_1
+VIEW IN SENSE
+When a snapshot is deleted from a repository, Elasticsearch deletes all files that are associated with the deleted snapshot and not used by any other snapshots. If the deleted snapshot operation is executed while the snapshot is being created the snapshotting process will be aborted and all files created as part of the snapshotting process will be cleaned. Therefore, the delete snapshot operation can be used to cancel long running snapshot operations that were started by mistake.
+
+A repository can be deleted using the following command:
+
+DELETE /_snapshot/my_backup
+

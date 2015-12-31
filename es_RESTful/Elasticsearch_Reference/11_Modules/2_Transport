@@ -1,0 +1,11 @@
+TCP Transport Profilesedit
+
+Elasticsearch allows you to bind to multiple ports on different interfaces by the use of transport profiles. See this example configuration
+
+transport.profiles.default.port: 9300-9400
+transport.profiles.default.bind_host: 10.0.0.1
+transport.profiles.client.port: 9500-9600
+transport.profiles.client.bind_host: 192.168.0.1
+transport.profiles.dmz.port: 9700-9800
+transport.profiles.dmz.bind_host: 172.16.1.2
+
