@@ -1,0 +1,2 @@
+The index.routing.allocation.total_shards_per_node setting allows to control how many total shards (replicas and primaries) for an index will be allocated per node.
+It can be dynamically set on a live index using the update index settings API.
