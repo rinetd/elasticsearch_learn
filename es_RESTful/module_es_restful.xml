@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_es_restful" default="compile.module.es_restful">
+  <dirname property="module.es_restful.basedir" file="${ant.file.module_es_restful}"/>
+  
+  <property name="module.jdk.home.es_restful" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.es_restful" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.es_restful" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.es_restful" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="es_restful.output.dir" value="${module.es_restful.basedir}/target/classes"/>
+  <property name="es_restful.testoutput.dir" value="${module.es_restful.basedir}/target/test-classes"/>
+  
+  <path id="es_restful.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="es_restful.module.production.classpath">
+    <path refid="${module.jdk.classpath.es_restful}"/>
+  </path>
+  
+  <path id="es_restful.runtime.production.module.classpath">
+    <pathelement location="${es_restful.output.dir}"/>
+  </path>
+  
+  <path id="es_restful.module.classpath">
+    <path refid="${module.jdk.classpath.es_restful}"/>
+    <pathelement location="${es_restful.output.dir}"/>
+  </path>
+  
+  <path id="es_restful.runtime.module.classpath">
+    <pathelement location="${es_restful.testoutput.dir}"/>
+    <pathelement location="${es_restful.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.es_restful">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.es_restful">
+    <patternset refid="excluded.from.module.es_restful"/>
+  </patternset>
+  
+  
+  <target name="compile.module.es_restful" depends="compile.module.es_restful.production,compile.module.es_restful.tests" description="Compile module es_RESTful"/>
+  
+  <target name="compile.module.es_restful.production" depends="register.custom.compilers" description="Compile module es_RESTful; production classes"/>
+  
+  <target name="compile.module.es_restful.tests" depends="register.custom.compilers,compile.module.es_restful.production" description="compile module es_RESTful; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.es_restful" description="cleanup module">
+    <delete dir="${es_restful.output.dir}"/>
+    <delete dir="${es_restful.testoutput.dir}"/>
+  </target>
+</project>
