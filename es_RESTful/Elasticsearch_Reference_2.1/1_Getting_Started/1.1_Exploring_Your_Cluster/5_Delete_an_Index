@@ -1,0 +1,25 @@
+curl -XDELETE 'localhost:9200/customer?pretty'
+curl 'localhost:9200/_cat/indices?v'
+And the response:
+
+curl -XDELETE 'localhost:9200/customer?pretty'
+{
+  "acknowledged" : true
+}
+curl 'localhost:9200/_cat/indices?v'
+health index pri rep docs.count docs.deleted store.size pri.store.size
+
+
+Before we move on, let’s take a closer look again at some of the API commands that we have learned so far:
+
+curl -XPUT 'localhost:9200/customer'
+curl -XPUT 'localhost:9200/customer/external/1' -d '
+{
+  "name": "John Doe"
+}'
+curl 'localhost:9200/customer/external/1'
+curl -XDELETE 'localhost:9200/customer'
+If we study the above commands carefully, we can actually see a pattern of how we access data in Elasticsearch. That pattern can be summarized as follows:
+
+curl -X<REST Verb> <Node>:<Port>/<Index>/<Type>/<ID>
+

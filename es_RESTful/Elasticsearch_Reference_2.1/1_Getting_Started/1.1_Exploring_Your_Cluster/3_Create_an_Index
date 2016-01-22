@@ -1,0 +1,11 @@
+curl -XPUT 'localhost:9200/customer?pretty'
+curl 'localhost:9200/_cat/indices?v'
+
+curl -XPUT 'localhost:9200/customer?pretty'
+{
+  "acknowledged" : true
+}
+
+curl 'localhost:9200/_cat/indices?v'
+health index    pri rep docs.count docs.deleted store.size pri.store.size
+yellow customer   5   1          0            0       495b           495b

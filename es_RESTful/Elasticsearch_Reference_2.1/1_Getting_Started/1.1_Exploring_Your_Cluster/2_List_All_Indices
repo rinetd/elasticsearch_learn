@@ -1,0 +1,7 @@
+Now let’s take a peek at our indices:
+
+curl 'localhost:9200/_cat/indices?v'
+And the response:
+
+curl 'localhost:9200/_cat/indices?v'
+health index pri rep docs.count docs.deleted store.size pri.store.size

@@ -1,0 +1,15 @@
+curl 'localhost:9200/_cat/health?v'
+And the response:
+
+epoch      timestamp cluster       status node.total node.data shards pri relo init unassign
+1394735289 14:28:09  elasticsearch green           1         1      0   0    0    0
+
+
+We can also get a list of nodes in our cluster as follows:
+
+curl 'localhost:9200/_cat/nodes?v'
+And the response:
+
+curl 'localhost:9200/_cat/nodes?v'
+host         ip        heap.percent ram.percent load node.role master name
+mwubuntu1    127.0.1.1            8           4 0.00 d         *      New Goblin
