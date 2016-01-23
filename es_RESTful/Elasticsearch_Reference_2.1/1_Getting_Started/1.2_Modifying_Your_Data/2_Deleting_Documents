@@ -1,0 +1,4 @@
+Deleting a document is fairly straightforward. This example shows how to delete our previous customer with the ID of 2:
+
+curl -XDELETE 'localhost:9200/customer/external/2?pretty'
+The delete-by-query plugin can delete all documents matching a specific query.

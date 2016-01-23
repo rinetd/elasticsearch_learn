@@ -1,0 +1,12 @@
+This example shows how to update our previous document (ID of 1) by changing the name field to "Jane Doe":
+
+curl -XPOST 'localhost:9200/customer/external/1/_update?pretty' -d '
+{
+  "doc": { "name": "Jane Doe" }
+}'
+This example shows how to update our previous document (ID of 1) by changing the name field to "Jane Doe" and at the same time add an age field to it:
+
+curl -XPOST 'localhost:9200/customer/external/1/_update?pretty' -d '
+{
+  "doc": { "name": "Jane Doe", "age": 20 }
+}'
