@@ -1,0 +1,2 @@
+sudo /sbin/chkconfig --add elasticsearch
+sudo service elasticsearch start

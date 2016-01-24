@@ -1,0 +1,13 @@
+Running as a daemonedit
+
+To run it in the background, add the -d switch to it:
+
+$ bin/elasticsearch -d
+
+PIDedit
+
+The Elasticsearch process can write its PID to a specified file on startup,
+making it easy to shut down the process later on:
+
+$ bin/elasticsearch -d -p pid
+$ kill `cat pid`

@@ -1,0 +1,42 @@
+Step 1: Disable shard allocation
+PUT /_cluster/settings
+{
+  "transient": {
+    "cluster.routing.allocation.enable": "none"
+  }
+}
+
+Step 2: Stop non-essential indexing and perform a synced flush (Optional)edit
+
+POST /_flush/synced
+
+Step 3: Stop and upgrade a single node
+
+
+Step 4: Start the upgraded node
+Start the now upgraded node and confirm that it joins the cluster by checking the log file or by checking the output of this request:
+
+GET _cat/nodes
+
+Step 5: Reenable shard allocation
+
+Once the node has joined the cluster, reenable shard allocation to start using the node:
+
+PUT /_cluster/settings
+{
+  "transient": {
+    "cluster.routing.allocation.enable": "all"
+  }
+}
+
+Step 6: Wait for the node to recover
+
+You should wait for the cluster to finish shard allocation before upgrading the next node. You can check on progress with the _cat/health request:
+
+GET _cat/health
+
+
+Shards that have not been sync-flushed may take some time to recover. The recovery status of individual shards can be monitored with the _cat/recovery request:
+
+GET _cat/recovery
+
