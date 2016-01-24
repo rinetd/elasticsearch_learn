@@ -1,0 +1,23 @@
+Going back to our last example, we executed this query:
+{
+  "query": { "match_all": {} }
+}
+
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": { "match_all": {} },
+  "size": 1
+}'
+
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": { "match_all": {} },
+  "from": 10,
+  "size": 10
+}'
+
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": { "match_all": {} },
+  "sort": { "balance": { "order": "desc" } }
+}'
