@@ -1,0 +1,18 @@
+Note: If you have custom template changes, please make sure to save it and merge any changes. You can get the existing template by running:
+
+curl -XGET localhost:9200/_template/logstash
+Add the following option to your Logstash config:
+
+output {
+        elasticsearch {
+                template_overwrite => true
+        }
+}
+
+bin/plugin update <plugin_name>
+
+bin/plugin install logstash-filter-de_dot
+
+Multiline Filter: If you are using the Multiline Filter in your configuration and upgrade to Logstash 2.0, you will get an error. Make sure to explicitly set the number of filter workers (-w) to 1. You can set the number of workers by passing a command line flag such as:
+
+bin/logstash `-w 1`

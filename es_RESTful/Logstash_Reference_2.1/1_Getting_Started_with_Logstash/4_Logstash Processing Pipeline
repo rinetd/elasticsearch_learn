@@ -11,7 +11,7 @@ redis: reads from a redis server, using both redis channels and redis lists. Red
 beats: processes events sent by Filebeat.
 For more information about the available inputs, see Input Plugins.
 
-Filtersedit
+Filters
 
 Filters are intermediary processing devices in the Logstash pipeline. You can combine filters with conditionals to perform an action on an event if it meets certain criteria. Some useful filters include:
 
@@ -23,7 +23,7 @@ geoip: add information about geographical location of IP addresses (also display
 
 For more information about the available filters, see Filter Plugins.
 
-Outputsedit
+Outputs
 
 Outputs are the final phase of the Logstash pipeline. An event can pass through multiple outputs, but once all output processing is complete, the event has finished its execution. Some commonly used outputs include:
 
@@ -33,7 +33,7 @@ graphite: send event data to graphite, a popular open source tool for storing an
 statsd: send event data to statsd, a service that "listens for statistics, like counters and timers, sent over UDP and sends aggregates to one or more pluggable backend services". If you’re already using statsd, this could be useful for you!
 For more information about the available outputs, see Output Plugins.
 
-Codecsedit
+Codecs
 
 Codecs are basically stream filters that can operate as part of an input or output. Codecs enable you to easily separate the transport of your messages from the serialization process. Popular codecs include json, msgpack, and plain (text).
 
