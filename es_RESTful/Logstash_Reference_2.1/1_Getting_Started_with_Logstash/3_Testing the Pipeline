@@ -1,0 +1,26 @@
+At this point, your first-pipeline.conf file looks like this:
+
+input {
+    twitter {
+        consumer_key =>
+        consumer_secret =>
+        keywords =>
+        oauth_token =>
+        oauth_token_secret =>
+    }
+    beats {
+        port => "5043"
+        ssl => true
+        ssl_certificate => "/path/to/ssl-cert"
+        ssl_key => "/path/to/ssl-key"
+    }
+}
+output {
+    elasticsearch {
+        hosts => ["IP Address 1:port1", "IP Address 2:port2", "IP Address 3"]
+    }
+    file {
+        path => /path/to/target/file
+    }
+}
+

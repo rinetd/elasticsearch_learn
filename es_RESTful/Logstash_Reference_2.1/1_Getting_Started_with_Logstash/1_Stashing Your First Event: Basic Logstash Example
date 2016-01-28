@@ -1,0 +1,8 @@
+To test your Logstash installation, run the most basic Logstash pipeline:
+
+cd logstash-{logstash_version}
+bin/logstash -e 'input { stdin { } } output { stdout {} }'
+
+hello world
+2013-11-21T01:22:14.405+0000 0.0.0.0 hello world
+

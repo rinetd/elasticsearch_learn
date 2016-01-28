@@ -1,0 +1,56 @@
+The following text represents the skeleton of a configuration pipeline:
+
+# The # character at the beginning of a line indicates a comment. Use
+# comments to describe your configuration.
+input {
+}
+# The filter part of this file is commented out to indicate that it is
+# optional.
+# filter {
+#
+# }
+output {
+}
+
+Parsing Apache Logs into Elasticsearch
+
+Edit the first-pipeline.conf file to add the following text:
+
+input {
+    file {
+        path => "/path/to/logstash-tutorial.log"
+        start_position => beginning
+    }
+}
+
+
+The default behavior of the file input plugin is to monitor a file for new information, in a manner similar to the UNIX tail -f command. To change this default behavior and process the entire file,
+we need to specify the position where Logstash starts processing the file.
+
+Testing Your Initial Pipelineedit
+
+At this point, your first-pipeline.conf file has input, filter, and output sections properly configured, and looks like this:
+
+input {
+    file {
+        path => "/Users/lilizhao/data/logstash-tutorial.log"
+        start_position => beginning
+    }
+}
+filter {
+    grok {
+        match => { "message" => "%{COMBINEDAPACHELOG}"}
+    }
+    geoip {
+        source => "clientip"
+    }
+}
+output {
+    elasticsearch {}
+    stdout {}
+}
+
+To verify your configuration, run the following command:
+
+bin/logstash -f first-pipeline.conf --configtest
+
