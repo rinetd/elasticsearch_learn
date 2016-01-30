@@ -1,0 +1,59 @@
+Step 1: Disable shard allocation
+
+PUT /_cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.enable": "none"
+  }
+}
+
+If upgrading from 0.90.x to 1.x, then use these settings instead:
+
+PUT /_cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.disable_allocation": false,
+    "cluster.routing.allocation.enable": "none"
+  }
+}
+
+Step 2: Perform a synced flushedit
+
+
+POST /_flush/synced
+
+Step 3: Shutdown and upgrade all nodesedit
+
+Step 4: Start the clusteredit
+
+GET _cat/health
+
+GET _cat/nodes
+
+Step 5: Wait for yellowedit
+
+Step 6: Reenable allocationedit
+
+PUT /_cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.enable": "all"
+  }
+}
+
+If upgrading from 0.90.x to 1.x, then use these settings instead:
+
+PUT /_cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.disable_allocation": true,
+    "cluster.routing.allocation.enable": "all"
+  }
+}
+
+You can monitor progress with the _cat/health and _cat/recovery APIs:
+
+GET _cat/health
+
+GET _cat/recovery
+

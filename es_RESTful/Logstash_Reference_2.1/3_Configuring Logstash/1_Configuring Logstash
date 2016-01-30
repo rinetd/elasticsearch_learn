@@ -1,0 +1,11 @@
+Let’s step through creating a simple config file and using it to run Logstash. Create a file named "logstash-simple.conf" and save it in the same directory as Logstash.
+
+input { stdin { } }
+output {
+  elasticsearch { hosts => ["localhost:9200"] }
+  stdout { codec => rubydebug }
+}
+Then, run logstash and specify the configuration file with the -f flag.
+
+bin/logstash -f logstash-simple.conf
+
