@@ -1,0 +1,12 @@
+Delete-by-query is now a pluginedit
+
+./bin/plugin install delete-by-query
+
+Multicast Discovery is now a pluginedit
+
+./bin/plugin install discovery-multicast
+
+_size is now a pluginedit
+
+./bin/plugin install mapper-size
+
